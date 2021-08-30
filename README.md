@@ -11,11 +11,13 @@ Finally a dashboard built using [Streamlit framework](https://streamlit.io/) to 
 
 ## To run the dashboard app
 
-Make sure you have Virtualenv installed to be able to activate the virtual environment before you dig in.
+Make sure you have Virtualenv installed to be able to run the app within a virtual environment before you dig in.
 
 `pip install virtualenv`
 
-Then, if you're using Windows, activate the environment using `env\Scripts\activate.bat`
-and also you might need to install the used packages using `pip install -r requirements.txt`
+Create the environment `py -m venv env`
+
+If you're using Windows, activate the environment using `env\Scripts\activate.bat`
+Then you'll need to install the used packages using `pip install -r requirements.txt`
 
 At the end, `streamlit run dashboard.py`
