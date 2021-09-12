@@ -1,6 +1,8 @@
 # Spotify-Insights
 A data pipeline built using the Spotify API, Python, MongoDB, SQLite and Streamlit.
 
+![](diagram.jpg)
+
 The pipeline focuses on *ingesting* raw data from Spotify using their API to get the [most recently played songs](https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-recently-played) of the user. MongoDB acts as our data lake where all the raw data
 is dumped. Everyday we dump the most recently played songs in a collection named by the day's date. We *extract* only the data we need using tools like *Jupyter Notebook*
 and *Pandas* or even *MS Excel* to clean and explore the data as we like. We keep a CSV file where everyday we append clean data to be used for further analysis or presentations.
