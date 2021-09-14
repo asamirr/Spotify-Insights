@@ -13,7 +13,7 @@ mongoclient = pymongo.MongoClient("mongodb://localhost:27017/")
 data_lake = mongoclient["raw_spotify"]
 DATABASE_LOCATION = "sqlite:///my_daily_tracks.sqlite"
 USER_ID = "asamirr" # your Spotify username 
-TOKEN = "BQAkWMwtziPfics-soeFOGZbTS0eSJ2ux_RIS-s7JIETENICQWuX1zCrDG59Np0QwHx4AVjQCKdEwnBze5YCxk35PKwVW7zEa3rsogs8jUEQHP7kPUmw3QYVsEtyMDOSYaie_txH9JKT" # your Spotify API token
+TOKEN = "BQB2B0imOfWytnbefLJ366aJ6YAprCC74u9ZyHK7wVgP1ZfOVDsoGcAqf1Gfe7QiPgCm1547IvlPGvQbIIBfnPpdVmQGCRht5Zc0ZL4msF3obCgqgx0OeC3ttpH5-DI0Cz4Zf0_N6NJx" # your Spotify API token
 
 def check_if_valid_data(df: pd.DataFrame) -> bool:
     # Check if dataframe is empty
@@ -32,13 +32,13 @@ def check_if_valid_data(df: pd.DataFrame) -> bool:
         raise Exception("Null values found")
 
     # Check that all timestamps are of yesterday's date
-    yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
-    yesterday = yesterday.replace(hour=0, minute=0, second=0, microsecond=0)
+    # yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+    # yesterday = yesterday.replace(hour=0, minute=0, second=0, microsecond=0)
 
-    timestamps = df["timestamp"].tolist()
-    for timestamp in timestamps:
-        if datetime.datetime.strptime(timestamp, '%Y-%m-%d') != yesterday:
-            raise Exception("At least one of the returned songs does not have a yesterday's timestamp")
+    # timestamps = df["timestamp"].tolist()
+    # for timestamp in timestamps:
+    #     if datetime.datetime.strptime(timestamp, '%Y-%m-%d') != yesterday:
+    #         raise Exception("At least one of the returned songs does not have a yesterday's timestamp")
 
     return True
 
@@ -57,13 +57,13 @@ if __name__ == "__main__":
     
     data = r.json()
     
-    with open('raw_data.json', 'w+') as f:
-        json.dump(data, f)
-    collection = data_lake["raw_" + datetime.datetime.now().strftime('%d-%m-%Y')]
-    with open('raw_data.json') as f:
-        json_file_data = json.load(f)
+    # with open('raw_data.json', 'w+') as f:
+    #     json.dump(data, f)
+    # collection = data_lake["raw_" + datetime.datetime.now().strftime('%d-%m-%Y')]
+    # with open('raw_data.json') as f:
+    #     json_file_data = json.load(f)
     
-    collection.insert_one(json_file_data)
+    # collection.insert_one(json_file_data)
 
     song_names = []
     artist_names = []
@@ -86,8 +86,8 @@ if __name__ == "__main__":
     }
 
     song_df = pd.DataFrame(song_dict, columns = ["song_name", "artist_name", "played_at", "timestamp"])
-    with open('clean_data.csv', 'a') as f:
-        song_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+    # with open('clean_data.csv', 'a') as f:
+    #     song_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
     
     # print(song_df)
     if check_if_valid_data(song_df):
